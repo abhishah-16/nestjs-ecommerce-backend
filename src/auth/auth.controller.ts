@@ -1,18 +1,21 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { User } from 'src/utilities/user.decorator';
 import { UserService } from '../shared/user.service';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
 export class AuthController {
-    constructor(private userservice: UserService,
+    constructor(
+        private userservice: UserService,
         private authservice: AuthService) { }
 
 
     @Get()
     @UseGuards(AuthGuard('jwt'))
-    tempAuth() {
-        return { auth: 'working!!!!' }
+    async findAll(@User() user: any) {
+        console.log(user);
+        return this.userservice.findAll()
     }
 
     @Post('login')

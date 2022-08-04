@@ -42,4 +42,9 @@ export class UserService {
         const { username } = payload;
         return await this.userModel.findOne({ username });
     }
+
+    async findAll() {
+        const users = await this.userModel.find()
+        return users
+    }
 }
