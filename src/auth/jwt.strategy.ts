@@ -10,7 +10,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
             secretOrKey: process.env.SECRET_KEY,
-
         });
     }
 
@@ -20,6 +19,5 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             return done(new HttpException('unauthorized', HttpStatus.UNAUTHORIZED), false)
         }
         return done(null, user, payload.iat);
-
     }
 }
