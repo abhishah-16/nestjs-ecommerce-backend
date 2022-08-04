@@ -9,8 +9,7 @@ import { UserService } from './user.service';
   providers: [UserService],
   exports: [UserService],
   imports: [MongooseModule.forFeature([
-    { name: 'User', schema: UserSchema },
-    { name: 'Product', schema: ProductSchema },
-    { name: 'Order', schema: OrderSchema }])]
+    { name: 'User', schema: UserSchema }
+   ])]
 })
 export class SharedModule { }
