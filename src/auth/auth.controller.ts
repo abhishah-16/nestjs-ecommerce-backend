@@ -14,7 +14,6 @@ export class AuthController {
     @Get()
     @UseGuards(AuthGuard('jwt'),SellerGuard)
     async findAll(@User() user: any) {
-        console.log(user);
         return this.userservice.findAll()
     }
 
@@ -36,7 +35,7 @@ export class AuthController {
             username: user.username,
             seller: user.seller,
         }
-        const token = await this.authservice.validateUser(payload)
+        const token = await this.authservice.signPayload(payload)
         return { user, token }
     }
 
