@@ -11,11 +11,11 @@ export class ProductService {
     constructor(@InjectModel('Product') private productModel: Model<Product>) { }
 
     async findAll() {
-        return await this.productModel.find().populate('owner', 'password')
+        return await this.productModel.find().select('-_id -__v -password -createdAt').populate('owner', '-_id -__v -password -createdAt')
     }
 
     async findOne(id: string) {
-        return await this.productModel.findById(id).populate('owner', 'password')
+        return await this.productModel.findById(id).select('-_id -__v -password -createdAt').populate('owner', '-_id -__v -password -createdAt')
     }
 
     async create(data: CreateProductDto, user: User) {
