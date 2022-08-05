@@ -4,7 +4,6 @@ import { Model } from 'mongoose';
 import { LoginDto, RegisterDto } from 'src/auth/auth.dto';
 import { User } from 'src/types/user';
 import * as bcrypt from 'bcrypt'
-import e from 'express';
 
 @Injectable()
 export class UserService {

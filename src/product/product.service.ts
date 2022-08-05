@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { throwError } from 'rxjs';
 import { Product } from 'src/types/product';
 import { User } from 'src/types/user';
 import { CreateProductDto, UpdateProductdto } from './product.dto';
@@ -11,11 +10,11 @@ export class ProductService {
     constructor(@InjectModel('Product') private productModel: Model<Product>) { }
 
     async findAll() {
-        return await this.productModel.find().select('-_id -__v -password -createdAt').populate('owner', '-_id -__v -password -createdAt')
+        return await this.productModel.find().select(' -password -createdAt').populate('owner', ' -password -createdAt')
     }
 
     async findOne(id: string) {
-        return await this.productModel.findById(id).select('-_id -__v -password -createdAt').populate('owner', '-_id -__v -password -createdAt')
+        return await this.productModel.findById(id).select('-password -createdAt').populate('owner', ' -password -createdAt')
     }
 
     async create(data: CreateProductDto, user: User) {
